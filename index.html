@@ -17,12 +17,16 @@
     <link rel="stylesheet" href="extensions/status/deck.status.css">
     <link rel="stylesheet" href="extensions/hash/deck.hash.css">
     <link rel="stylesheet" href="extensions/scale/deck.scale.css">
+    <link rel="stylesheet" href="extensions/codemirror/deck.codemirror.css">
 
     <!-- Style theme. More available in /themes/style/ or create your own. -->
-    <link rel="stylesheet" href="http://imakewebthings.com/deck.js/themes/style/swiss.css">
+    <link rel="stylesheet" href="themes/style/swiss.css">
 
     <!-- Transition theme. More available in /themes/transition/ or create your own. -->
     <link rel="stylesheet" href="themes/transition/horizontal-slide.css">
+
+    <!-- code mirror theme -->
+    <link rel="stylesheet" href="extensions/codemirror/themes/default.css">
 
     <!-- Required Modernizr file -->
     <script src="js/modernizr.custom.js"></script>
@@ -53,12 +57,104 @@
     </section>
 
     <section class="slide">
+      <h2>REST > CRUD</h2>
+      <h3>REST?</h3>
+      <textarea class="code" mode="ruby" style="display: none;" readonly="readonly">
+class BlearghController < ActionController::Base
+  def index
+  end
+
+  def new
+  end
+
+  def create
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+end
+      </textarea>
+      <div class="slide">
+        <h3>Yes, but REST does more</h3>
+        <p>Wrapping REST around MVC is a leaky abstraction</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>REST =~ HTTP</h2>
+      <h3>To get REST right, you need to get HTTP right</h3>
+      <p class="slide">authentication; content type negotiation; caching; redirects; language; http verbs; status codes...</p>
+      <h3 class="slide">So let's build REST/HTTP apps shaped around HTTP</h3>
+    </section>
+
+    <section class="slide">
+      <h2>Doing HTTP properly is hard</h2>
+      <p>Actually, doing HTTP "just ok" isn't too hard</p>
+      <div class="slide">
+        <p>But doing HTTP <strong>properly</strong> is <strong>HARD</strong></p>
+        <img src="images/http-headers-status-v3.png"/>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Enter Webmachine</h2>
+      <p>Original written in Erlang. Still going strong</p>
+      <p>Talking about Ruby port today</p>
+    </section>
+
+    <section class="slide">
+      <h2>HTTP protocol is FSM</h2>
+      <p>So let's just define functions to handle the decision points</p>
+      <code>resource_exists? service_available? is_authorized? forbidden? allow_missing_post? malformed_request? uri_too_long? known_content_type? valid_content_headers? valid_entity_length? options allowed_methods known_methods delete_resource delete_completed? post_is_create? create_path base_uri process_post content_types_provided content_types_accepted charsets_provided languages_provided language_chosen encodings_provided variances is_conflict? multiple_choices? previously_existed? moved_permanently? moved_temporarily? last_modified expires generate_etag finish_request handle_exception validate_content_checksum</code>
+    </section>
+
+    <section class="slide">
+      <h2>Fill in the blanks. Webmachine takes care of playing nice with HTTP for you</h2>
+      <textarea class="code" mode="ruby" style="display: none;" readonly="readonly">
+class BlearghPostResource < Webmachine::Resource
+  def service_available?
+    DB.connected?
+  end
+
+  def allowed_methods
+    %w{GET POST PUT DELETE HEAD}
+  end
+
+  def resource_exist?
+    @bleargh_post = BlearghPost.find(request.path_info(:post_id))
+    !@bleargh_post.nil?
+  end
+
+  ...
+
+end
+      </textarea>
+    </section>
+
+    <section class="slide">
+      <h2>Some code</h2>
+      <p><a href="https://github.com/madlep/webmachine_ruby_shortener">https://github.com/madlep/webmachine_ruby_shortener</a></p>
+    </section>
+
+    <section class="slide">
       <h2>Cheers</h2>
       <p>Julian Doherty</p>
       <p><a href="http://twitter.com/madlep/">@madlep</a></p>
       <p><a href="mailto:madlep@madlep.com">madlep@madlep.com</a></p>
       <h3>Credits</h3>
       <p>Scumbag REST pic from <a href="http://lostechies.com/derickbailey/2012/01/25/rant-thats-not-rest/">Lost Techies</a>
+      <p>Basho webmachine wiki for flow diagram</p>
+      <p>webmachine</p>
+      <p>webmachine ruby</p>
     </section>
 
     <!-- End slides. -->
@@ -102,6 +198,11 @@
     <script src="extensions/status/deck.status.js"></script>
     <script src="extensions/navigation/deck.navigation.js"></script>
     <script src="extensions/scale/deck.scale.js"></script>
+    <script src="extensions/codemirror/codemirror.js"></script>
+
+    <script src="extensions/codemirror/mode/ruby/ruby.js"></script>
+
+    <script src="extensions/codemirror/deck.codemirror.js"></script>
 
     <!-- Initialize the deck. You can put this in an external file if desired. -->
     <script>
