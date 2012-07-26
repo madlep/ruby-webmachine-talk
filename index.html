@@ -37,6 +37,8 @@
 
     <section class="slide">
       <h1>Webmachine for Ruby</h1>
+      <p>Julian Doherty</p>
+      <p><a href="http://twitter.com/madlep/">@madlep</a></p>
     </section>
 
     <section class="slide">
@@ -147,18 +149,21 @@ end
     </section>
 
     <section class="slide">
-      <h2>Why would you use Webmachine?</h2>
+      <h2>When could you use Webmachine?</h2>
       <ul>
-        <li>You're building a REST API</li>
-        <li>In multiple languages</li>
+        <li>Building a REST API</li>
+        <li>Using multiple (human) languages</li>
         <li>Serving up multiple content types</li>
-        <li>Maybe you're doing more than just CRUD</li>
+        <li>Doing more than just CRUD</li>
+        <li>Fat JS client talking JSON over AJAX to the server</li>
         <li>You know and care what HATEOAS means</li>
       </ul>
       <h2>Why wouldn't you use it?</h2>
       <ul>
         <li>Traditional site. DB → Model → Controller → HTML (use Rails)</li>
         <li>Something super simple (use Sinatra)</li>
+        <li>Websockets/long polling/comet. Explictly designed for req/response HTTP</li>
+        <li>You use lots of Rack middleware</li>
       </ul>
     </section>
 
@@ -168,10 +173,11 @@ end
       <p><a href="http://twitter.com/madlep/">@madlep</a></p>
       <p><a href="mailto:madlep@madlep.com">madlep@madlep.com</a></p>
       <h3>Credits</h3>
-      <p>Scumbag REST pic from <a href="http://lostechies.com/derickbailey/2012/01/25/rant-thats-not-rest/">Lost Techies</a>
-      <p>Basho webmachine wiki for flow diagram</p>
-      <p>webmachine</p>
-      <p>webmachine ruby</p>
+      <ul>
+        <li>Scumbag REST pic from <a href="http://lostechies.com/derickbailey/2012/01/25/rant-thats-not-rest/">Lost Techies</a></li>
+        <li><a href="http://wiki.basho.com/Webmachine.html">Webmachine (Erlang)</a></li>
+        <li><a href="https://github.com/seancribbs/webmachine-ruby">Webmachine (Ruby)</a></li>
+      </ul>
     </section>
 
     <!-- End slides. -->
