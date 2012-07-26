@@ -101,6 +101,7 @@ end
       <p>Actually, doing HTTP "just ok" isn't too hard</p>
       <div class="slide">
         <p>But doing HTTP <strong>properly</strong> is <strong>HARD</strong></p>
+        <p>So... do I return a <code>201 Created</code>... Or a <code>409 Conflict</code>... or <code>417 Expectation Failed</code>?... What if the client accepts JSON but has a character set I don't know about?... What if I don't implement that method on that resource?... What if caching headers don't match?... What if the resource doesn't exist, but it's being updated?... Or what about...</p>
         <img src="images/http-headers-status-v3.png"/>
       </div>
     </section>
@@ -142,7 +143,23 @@ end
 
     <section class="slide">
       <h2>Some code</h2>
-      <p><a href="https://github.com/madlep/webmachine_ruby_shortener">https://github.com/madlep/webmachine_ruby_shortener</a></p>
+      <h3><a href="https://github.com/madlep/webmachine_ruby_shortener">https://github.com/madlep/webmachine_ruby_shortener</a></h3>
+    </section>
+
+    <section class="slide">
+      <h2>Why would you use Webmachine?</h2>
+      <ul>
+        <li>You're building a REST API</li>
+        <li>In multiple languages</li>
+        <li>Serving up multiple content types</li>
+        <li>Maybe you're doing more than just CRUD</li>
+        <li>You know and care what HATEOAS means</li>
+      </ul>
+      <h2>Why wouldn't you use it?</h2>
+      <ul>
+        <li>Traditional site. DB → Model → Controller → HTML (use Rails)</li>
+        <li>Something super simple (use Sinatra)</li>
+      </ul>
     </section>
 
     <section class="slide">
